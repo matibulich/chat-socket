@@ -44,7 +44,7 @@ form{
     margin:5px
 }
 
-input{
+.input{
     border: solid 1px;
     border-radius: 99px;
     flex: 1;
@@ -55,7 +55,7 @@ input{
     
 }
 
-button{
+.btn-enviar{
     all: unset;
     margin:5px;
     height:40px;
@@ -83,3 +83,5 @@ button{
           }
         }
       }
+
+  

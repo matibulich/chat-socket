@@ -1,11 +1,10 @@
 import express from "express";
-
 import logger from "morgan"; //logger
 import path from "path";
 import { createClient } from "@libsql/client"; //turso base sql
 import { fileURLToPath } from "url";
 import { Server } from "socket.io";
-import { createServer } from "http";
+import { createServer } from "http"; // modulo de node para que funcionen los sockets
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -33,7 +32,7 @@ await db.execute(`CREATE TABLE IF NOT EXISTS mensajes(
 io.on("connection", async (socket) => {
   console.log("Usuario conectado");
 
-  const usuario = socket.handshake.auth.user;
+  const usuario = socket.handshake.auth.user?.trim() || "anónimo";
 
   socket.on("disconnect", () => {
     console.log("Usuario desconectado");
