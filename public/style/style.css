@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +10,7 @@ body {
     color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: grid;
-    place-content: start center; /* Alinea el contenido al inicio verticalmente y al centro horizontalmente */
+    place-content: start center;
     height: 100vh;
     padding: 30px;
     grid-template-rows: auto 1fr;
@@ -28,60 +29,90 @@ h1 {
     overflow: hidden;
     border: solid 2px rgb(142, 142, 236);
     padding: 15px;
-    border-radius:2%;
-    position:relative
-   
+    border-radius: 2%;
+    position: relative;
 }
 
-form{
-   
+form {
     display: flex;
     align-items: center;
     position: absolute;
-    bottom:12px;
-    right:0;
-    left:0;
-    margin:5px
+    bottom: 12px;
+    right: 0;
+    left: 0;
+    margin: 5px;
 }
 
-.input{
+.input {
     border: solid 1px;
     border-radius: 99px;
     flex: 1;
-    padding:5px;
+    padding: 5px;
     margin: 5px;
-    height:60px
-   
-    
+    height: 60px;
 }
 
-.btn-enviar{
+.btn-enviar {
     all: unset;
-    margin:5px;
-    height:40px;
-    padding:5px;
+    margin: 5px;
+    height: 40px;
+    padding: 5px;
     cursor: pointer;
     background-color: rgb(142, 142, 236);
-    border-radius: 4px; }
+    border-radius: 4px;
+}
 
-    #mensajes {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        overflow-y: auto;
-        overflow-x: hidden;
-        height: 90%;
-        scroll-behavior: smooth;
-      
-        li {
-          padding: 0.5rem 1rem;
-      
-          small {
-            display: block;
-            font-size: 0.8em;
-            color: #dd5050;
-          }
-        }
-      }
+#mensajes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 90%;
+    scroll-behavior: smooth;
+}
 
-  
+#mensajes li {
+    padding: 0.5rem 1rem;
+}
+
+#mensajes li small {
+    display: block;
+    font-size: 0.8em;
+    color: #dd5050;
+}
+
+.fecha-format {
+    color: rgb(107, 105, 105);
+    margin-left: 30px;
+}
+
+/* Media Queries para hacer el chat responsive */
+@media (max-width: 600px) {
+    #chat {
+        width: 100%;
+        height: 80%;
+    }
+
+    .input {
+        height: 40px;
+    }
+
+    .btn-enviar {
+        height: 30px;
+    }
+}
+
+@media (max-width: 400px) {
+    #chat {
+        padding: 10px;
+    }
+
+    .input {
+        height: 30px;
+    }
+
+    .btn-enviar {
+        height: 25px;
+    }
+}

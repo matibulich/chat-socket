@@ -21,9 +21,12 @@ const form = document.getElementById("form");
 const input = document.getElementById("input");
 const mensajes = document.getElementById("mensajes");
 
-socket.on("chat message", ({ msg, user, id }) => {
+socket.on("chat message", ({ msg, user, id, fecha }) => {
+    const date = new Date(fecha)
+    const fechaFormat =`${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}hs`
+
     const items = `<li>
-    <small>${user}</small>
+    <small>${user} <span class="fecha-format">[${fechaFormat}]</span>  </small>
      ${msg} 
      </li>`;
     mensajes.insertAdjacentHTML("beforeend", items); //inserta el mensaje en una posición específica, relativa al elemento que llama, "beforeend" debe ser insertado justo antes del final del elemento

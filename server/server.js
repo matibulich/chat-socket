@@ -26,7 +26,7 @@ const db = createClient({
 });
 //CREACION DE TABLA
 await db.execute(`CREATE TABLE IF NOT EXISTS mensajes(
-    id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, user TEXT
+    id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, user TEXT, fecha TEXT
     )`);
 
 io.on("connection", async (socket) => {
@@ -38,12 +38,16 @@ io.on("connection", async (socket) => {
     console.log("Usuario desconectado");
   });
 
-  socket.on("chat message", async ({msg, user}) => {
+  socket.on("chat message", async ({msg}) => {
+    const now = new Date();
+    const fecha = now.toString()
+
+
     let resultado;
     try {
       resultado = await db.execute({
-        sql: `INSERT INTO mensajes (content, user) VALUES (:msg, :user)`, //(:msg) remplazado por el valor verdadero del mensaje
-        args: { msg, user:usuario },
+        sql: `INSERT INTO mensajes (content, user, fecha) VALUES (:msg, :user, :fecha)`, //(:msg) remplazado por el valor verdadero del mensaje
+        args: { msg, user:usuario, fecha },
       });
       // console.log("Mensaje insertado en la base de datos");
     } catch (error) {
@@ -51,7 +55,7 @@ io.on("connection", async (socket) => {
       return;
     }
 
-    io.emit("chat message",{ msg, user:usuario});
+    io.emit("chat message",{ msg, user:usuario, fecha});
  
     //recupera los mensajes sin conexion
     
@@ -60,12 +64,12 @@ io.on("connection", async (socket) => {
   if (!socket.recovered) {
     try {
      const resultados = await db.execute({
-       sql: "SELECT id , content, user FROM mensajes WHERE id > ?",
+       sql: "SELECT id , content, user, fecha FROM mensajes WHERE id > ?",
        args: [socket.handshake.auth.serverOffset ?? 0],
      });
 
      resultados.rows.forEach((row) => {
-       socket.emit("chat message",{msg:row.content, user: row.user, id: row.id.toString()});
+       socket.emit("chat message",{msg: row.content, user: row.user, id: row.id.toString(), fecha: row.fecha});
      });
    } catch (error) {
      console.error(error);
