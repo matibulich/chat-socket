@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node server/server.js"
+    "dev": "node server/server.js",
+    "start": "node server/server.js"
   },
   "author": "matias bulich",
   "license": "ISC",
