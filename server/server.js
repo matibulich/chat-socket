@@ -33,6 +33,8 @@ await db.execute(`CREATE TABLE IF NOT EXISTS mensajes(
 io.on("connection", async (socket) => {
   console.log("Usuario conectado");
 
+  const usuario = socket.handshake.auth.user;
+
   socket.on("disconnect", () => {
     console.log("Usuario desconectado");
   });
@@ -42,7 +44,7 @@ io.on("connection", async (socket) => {
     try {
       resultado = await db.execute({
         sql: `INSERT INTO mensajes (content, user) VALUES (:msg, :user)`, //(:msg) remplazado por el valor verdadero del mensaje
-        args: { msg, user },
+        args: { msg, user:usuario },
       });
       // console.log("Mensaje insertado en la base de datos");
     } catch (error) {
@@ -50,7 +52,7 @@ io.on("connection", async (socket) => {
       return;
     }
 
-    io.emit("chat message",{ msg, user});
+    io.emit("chat message",{ msg, user:usuario});
  
     //recupera los mensajes sin conexion
     

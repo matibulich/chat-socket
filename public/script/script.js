@@ -1,6 +1,10 @@
 import { io } from 'https://cdn.socket.io/4.7.5/socket.io.esm.min.js';
+
+const usuario = prompt("Ingrese su usuario");
+
 const socket = io({
     auth:{
+        user:usuario,
         serverOffset:0
     }
 })
@@ -9,7 +13,7 @@ const form = document.getElementById("form")
 const input = document.getElementById("input")
 const mensajes = document.getElementById("mensajes")
 
-const usuario = prompt("Ingrese su usuario")
+
 
 socket.on("chat message", ({msg, user, id})=>{
     const items = `<li>
