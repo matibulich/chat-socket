@@ -14,7 +14,12 @@ body {
     height: 100vh;
     padding: 30px;
     grid-template-rows: auto 1fr;
-    background-color: black;
+    
+    background-image: url(/img/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    
 }
 
 h1 {
@@ -24,6 +29,7 @@ h1 {
 }
 
 #chat {  
+   
     height: 100%;
     width: 400px;
     overflow: hidden;
@@ -31,6 +37,10 @@ h1 {
     padding: 15px;
     border-radius: 2%;
     position: relative;
+    background-color: black;
+    box-shadow:  6px 9px 12px black;
+    
+ 
 }
 
 form {
@@ -99,7 +109,8 @@ form {
     }
 
     .btn-enviar {
-        height: 30px;
+        height: 25px;
+        font-size: 13px;
     }
 }
 
@@ -113,6 +124,7 @@ form {
     }
 
     .btn-enviar {
-        height: 25px;
+        height: 20px;
+        font-size: 10px;
     }
 }
